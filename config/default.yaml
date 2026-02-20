@@ -1,0 +1,90 @@
+# Simulation Configuration
+simulation:
+  grid_size: [30, 30]
+  time_step: 0.1
+  max_simulation_time: 60.0
+  collision_buffer: 0.5
+  seed: 42
+  
+  # Safety limits
+  max_velocity: 2.0
+  max_angular_velocity: 1.0
+  max_acceleration: 1.0
+  
+  # Visualization
+  visualize: true
+  save_trajectory: true
+
+# Robot Configuration
+robot:
+  type: "differential_drive"
+  wheel_base: 0.5
+  wheel_radius: 0.1
+  max_velocity: 2.0
+  max_angular_velocity: 1.0
+  max_acceleration: 1.0
+  
+  # Control parameters
+  control_frequency: 10.0
+  position_tolerance: 0.1
+  orientation_tolerance: 0.1
+  
+  # Safety limits
+  emergency_stop_distance: 0.5
+  collision_buffer: 0.2
+
+# Path Planning Configuration
+planner:
+  algorithm: "astar"
+  heuristic_weight: 1.0
+  allow_diagonal: true
+  
+  # RRT* specific
+  max_iterations: 1000
+  step_size: 1.0
+  goal_tolerance: 1.0
+  rewire_radius: 2.0
+  
+  # MPC specific
+  horizon_length: 10
+  control_horizon: 5
+  
+  # General
+  collision_buffer: 0.5
+  seed: 42
+
+# Controller Configuration
+controller:
+  type: "pid"
+  
+  # PID gains
+  kp_linear: 1.0
+  ki_linear: 0.0
+  kd_linear: 0.1
+  kp_angular: 2.0
+  ki_angular: 0.0
+  kd_angular: 0.1
+  
+  # Pure Pursuit
+  lookahead_distance: 1.0
+
+# Evaluation Configuration
+evaluation:
+  output_dir: "evaluation_results"
+  save_trajectories: true
+  generate_report: true
+  
+  # Metrics weights for composite score
+  weights:
+    success_rate: 0.3
+    path_efficiency: 0.2
+    smoothness_score: 0.15
+    tracking_error: -0.1
+    collision_rate: -0.15
+    planning_time: -0.1
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "simulation.log"
